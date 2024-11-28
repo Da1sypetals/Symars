@@ -8,7 +8,8 @@ sympy
 ```
 
 # Use
-See `sym/sym2rust.ipynb` and `sym/mat.ipynb`.
+- See `sym/sym2rust.ipynb` and `sym/mat.ipynb`.
+- Refer to `docs/user_docs.pdf` for details.
 
 # Support
 

@@ -133,3 +133,6 @@ SymarsNalgebra(dtype: DType, tol: float = 1e-9, debug: bool = False)
      - `mat` (`sp.Matrix`): A SymPy matrix whose elements will be converted to Rust code.
      - `func_name` (`str`): The base name for the Rust matrix function.
    - Returns: `str` containing the complete Rust code for the matrix operation, including individual element functions and the matrix assembly function.
+
+= Notes
++ Remember pass legal identifier (in Rust) to the `name` parameter.
