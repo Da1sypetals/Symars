@@ -12,6 +12,7 @@ f32, f64
 ```rust
 + - * /
 powf
+
 powi // only for constant integers
 sqrt
 sin, cos, tan, asin, acos, atan2
