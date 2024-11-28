@@ -1,5 +1,6 @@
 # Symars
 Generate Rust code from symbolic vector and matrix expressions.
+Build dense small matrix from symbolic dense matrix expressions.
 
 # Requirements
 ```
@@ -9,9 +10,7 @@ sympy
 # Use
 See `sym/sym2rust.ipynb` and `sym/mat.ipynb`.
 
-# Supported
-1. Build dense small matrix from dense matrix expr;
-2. Build triplet list from triplet-represented sparse matrix expr.
+# Support
 
 ## Supported linear algebra crate 
 - `nalgebra`
