@@ -5,6 +5,10 @@ Generate Rust code from symbolic vector and matrix expressions.
 ```
 sympy
 ```
+
+# Use
+See `sym/sym2rust.ipynb` and `sym/mat.ipynb`.
+
 # Supported
 1. Build dense small matrix from dense matrix expr;
 2. Build triplet list from triplet-represented sparse matrix expr.
