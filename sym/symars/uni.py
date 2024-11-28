@@ -1,12 +1,9 @@
 import sympy as sp
-from .meta import DType, func_template
-
-
-###################
+from .meta import DType, func_template, assert_name
 
 
 class SymarsUni:
-    def __init__(self, dtype: DType, tol: float = 1e-8, debug: bool = False):
+    def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
         self.dtype = dtype
         self.debug_on = debug
         self.tol = tol
@@ -22,17 +19,7 @@ class SymarsUni:
     @property
     def literal_suffix(self):
         """Return the appropriate suffix for the type (either F32 or F64)."""
-        if self.dtype == DType.F32:
-            return "_f32"
-        else:
-            return "_f64"
-
-    @property
-    def param_type(self):
-        if self.dtype == DType.F32:
-            return "f32"
-        else:
-            return "f64"
+        return f"_{str(self.dtype)}"
 
     def parse_symbol_or_literal(self, expr):
         """Parse the input and ensure it's either a symbol or a literal (int or float)."""
@@ -53,26 +40,44 @@ class SymarsUni:
             )
 
     def generate_func(self, name: str, expr):
+        assert_name(name)
+
         params = sorted(list(map(lambda x: str(x), expr.free_symbols)))
-        params_decl = [f"{p}: {self.param_type}" for p in params]
+        params_decl = [f"{p}: {str(self.dtype)}" for p in params]
         params_list = ", ".join(params_decl)
 
-        code = self.sympy_to_rust(expr)
-
-        funcimpl = func_template(name, params_list, self.param_type, code, inline=True)
-        return funcimpl
+        return self._generate_func_code(expr, name, params_list)
 
     def generate_func_given_params(self, name: str, expr, params):
         """
         You MUST make sure your parameter list is correct!!!
         """
-        params_decl = [f"{p}: {self.param_type}" for p in params]
+        assert_name(name)
+        for p in params:
+            assert_name(p)
+
+        params_decl = [f"{p}: {str(self.dtype)}" for p in params]
         params_list = ", ".join(params_decl)
 
-        code = self.sympy_to_rust(expr)
+        return self._generate_func_code(expr, name, params_list)
 
-        funcimpl = func_template(name, params_list, self.param_type, code, inline=True)
+    def _generate_func_code(self, expr, name, params_list):
+        code = self.sympy_to_rust(expr)
+        const = isinstance(expr, (sp.Number, sp.Integer))
+
+        funcimpl = func_template(
+            name,
+            params_list,
+            self.dtype,
+            code,
+            inline=True,
+            const=const,
+        )
         return funcimpl
+
+    ###########################################################################
+    ########################### main logic entrance ###########################
+    ###########################################################################
 
     def sympy_to_rust(self, expr):
         """Translate a SymPy expression to Rust code."""

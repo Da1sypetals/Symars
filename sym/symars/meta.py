@@ -5,6 +5,9 @@ class DType(Enum):
     F32 = 0
     F64 = 1
 
+    def __str__(self) -> str:
+        return "f32" if self == DType.F32 else "f64"
+
 
 def funcname(name, mi, ni):
     return f"{name}_{mi}_{ni}"
@@ -25,14 +28,98 @@ def watermarked(code):
     return f"{HEAD}\n{code.replace(HEAD, '')}"
 
 
-def func_template(name, param_list, return_value_type, code, inline: bool = True):
+def func_template(
+    name,
+    param_list,
+    value_type: DType,
+    code,
+    inline: bool = True,
+    const: bool = False,
+):
     code = f"""
 
 {"#[inline]" if inline else ""}
-pub fn {name}({param_list}) -> {return_value_type} {{
+pub {"const" if const else ""} fn {name}({param_list}) -> {str(value_type)} {{
 
     {code}
 
 }}
 """
     return watermarked(code)
+
+
+def is_valid_rust_ident(name: str) -> bool:
+    # 检查是否是 Rust 关键字
+    if name in RUST_KEYWORDS:
+        return False
+
+    # 检查是否以字母或下划线开头
+    if not (name[0].isalpha() or name[0] == "_"):
+        return False
+
+    # 检查是否包含非法字符
+    for char in name[1:]:
+        if not (char.isalnum() or char == "_"):
+            return False
+
+    return True
+
+
+def assert_name(name: str):
+    assert is_valid_rust_ident(
+        name
+    ), f"Invalid function name! Expects a valid Rust identifier, found `{name}`"
+
+
+RUST_KEYWORDS = {
+    "as",
+    "break",
+    "const",
+    "continue",
+    "crate",
+    "else",
+    "enum",
+    "extern",
+    "false",
+    "fn",
+    "for",
+    "if",
+    "impl",
+    "in",
+    "let",
+    "loop",
+    "match",
+    "mod",
+    "move",
+    "mut",
+    "pub",
+    "ref",
+    "return",
+    "self",
+    "Self",
+    "static",
+    "struct",
+    "super",
+    "trait",
+    "true",
+    "type",
+    "unsafe",
+    "use",
+    "where",
+    "while",
+    "async",
+    "await",
+    "dyn",
+    "abstract",
+    "become",
+    "box",
+    "do",
+    "final",
+    "macro",
+    "override",
+    "priv",
+    "typeof",
+    "unsized",
+    "virtual",
+    "yield",
+}

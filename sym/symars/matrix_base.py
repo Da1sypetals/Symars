@@ -1,10 +1,10 @@
 import sympy as sp
-from .meta import DType, funcname
+from .meta import DType, funcname, assert_name
 from .uni import SymarsUni
 
 
 class SymarsDense:
-    def __init__(self, dtype: DType, tol: float = 1e-8, debug: bool = False):
+    def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
         self.dtype = dtype
         self.uni = SymarsUni(dtype, tol, debug)
 
@@ -12,6 +12,8 @@ class SymarsDense:
         return sorted(list(map(lambda x: str(x), mat.free_symbols)))
 
     def generate(self, mat: sp.Matrix, func_name: str):
+        assert_name(func_name)
+
         m, n = mat.shape
         params = self.params(mat)
         entries = {}

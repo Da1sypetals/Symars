@@ -1,12 +1,14 @@
 import sympy as sp
-from .meta import DType, funcname, watermarked
+from .meta import DType, funcname, watermarked, assert_name
 from .matrix_base import SymarsDense
 import itertools
 
 
 def nalgebra_template(name, params, dtype_str, return_shape):
-    if len(return_shape) != 2:
-        raise ValueError(f"Return shape shoule have 2 dimensions, found {return_shape}")
+    assert_name(name)
+    assert (
+        len(return_shape) == 2
+    ), "Return shape shoule have 2 dimensions, found {return_shape}"
 
     m, n = return_shape
     range_prod = itertools.product(range(m), range(n))
@@ -31,7 +33,7 @@ pub fn {name}({param_list}) -> nalgebra::SMatrix<{dtype_str}, {m}, {n}> {{
 
 
 class SymarsNalgebra:
-    def __init__(self, dtype: DType, tol: float = 1e-8, debug: bool = False):
+    def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
         self.dtype = dtype
         self.dense = SymarsDense(dtype, tol, debug)
 
@@ -39,7 +41,7 @@ class SymarsNalgebra:
         entries_impl = self.dense.generate(mat, func_name)
         params = self.dense.params(mat)
         entries_impl["matrix"] = nalgebra_template(
-            func_name, params, self.dense.uni.param_type, mat.shape
+            func_name, params, str(self.dtype), mat.shape
         )
 
         output_code = "\n".join(entries_impl.values())
