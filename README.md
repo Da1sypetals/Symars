@@ -1,20 +1,26 @@
 # Symars
 Generate Rust code from symbolic vector and matrix expressions.
 
+# Requirements
+```
+sympy
+```
 # Supported
 1. Build dense small matrix from dense matrix expr;
 2. Build triplet list from triplet-represented sparse matrix expr.
 
+## Supported linear algebra crate 
+- `nalgebra`
+> If you want to support your own linear algebra crate, refer to `nalgebra.py`.
+
 ## Supported data types
-f32, f64
+`f32`, `f64`
 
 ## Supported operations
 ```rust
 + - * /
-powf
-
+powf, sqrt
 powi // only for constant integers
-sqrt
 sin, cos, tan, asin, acos, atan2
 sinh, cosh, tanh, asinh, acosh, atanh
 exp, exp2

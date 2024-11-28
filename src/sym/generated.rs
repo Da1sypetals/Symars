@@ -8,17 +8,19 @@ Repository: https://github.com/Da1sypetals/Symars
 
 #[inline]
 pub fn test_matrix_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
+    ((-1_f64) * (((a) + (h)).exp()))
+        + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c))))
+        + ((((-1_f64) * (h)) + ((f) * (g))).ln())
 }
 
 #[inline]
 pub fn test_matrix_0_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
+    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
 }
 
 #[inline]
 pub fn test_matrix_0_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
+    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 }
 
 #[inline]
@@ -28,29 +30,27 @@ pub fn test_matrix_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h
 
 #[inline]
 pub fn test_matrix_1_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((c).max(d)) + ((a).min(b))
+    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
 }
 
 #[inline]
 pub fn test_matrix_1_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
-}
-
-#[inline]
-pub fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
     ((-1_f64) * (((c).cosh()).tanh())) + (((b).sqrt()).exp()) + (((a).ln()).sin())
 }
 
 #[inline]
+pub fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
+}
+
+#[inline]
 pub fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((-1_f64) * (((a) + (h)).exp()))
-        + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c))))
-        + ((((-1_f64) * (h)) + ((f) * (g))).ln())
+    (((b).cos()) * ((c).tan())) + ((a).sin())
 }
 
 #[inline]
 pub fn test_matrix_2_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
+    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
 }
 
 pub fn test_matrix(
