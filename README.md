@@ -14,7 +14,9 @@ sympy
 # Support
 
 ## Supported linear algebra crate 
-- `nalgebra`
+- `nalgebra`, returns a matrix;
+- `faer`, passes in a mutable slice of matrix and modifies it.
+
 > If you want to support your own linear algebra crate, refer to `nalgebra.py`.
 
 ## Supported data types

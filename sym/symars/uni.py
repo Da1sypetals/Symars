@@ -39,34 +39,34 @@ class SymarsUni:
                 f"Invalid expression: {expr}. Must be a symbol or a literal."
             )
 
-    def generate_func(self, name: str, expr):
-        assert_name(name)
+    def generate_func(self, func_name: str, expr):
+        assert_name(func_name)
 
         params = sorted(list(map(lambda x: str(x), expr.free_symbols)))
         params_decl = [f"{p}: {str(self.dtype)}" for p in params]
         params_list = ", ".join(params_decl)
 
-        return self._generate_func_code(expr, name, params_list)
+        return self._generate_func_code(expr, func_name, params_list)
 
-    def generate_func_given_params(self, name: str, expr, params):
+    def generate_func_given_params(self, func_name: str, expr, params):
         """
         You MUST make sure your parameter list is correct!!!
         """
-        assert_name(name)
+        assert_name(func_name)
         for p in params:
             assert_name(p)
 
         params_decl = [f"{p}: {str(self.dtype)}" for p in params]
         params_list = ", ".join(params_decl)
 
-        return self._generate_func_code(expr, name, params_list)
+        return self._generate_func_code(expr, func_name, params_list)
 
-    def _generate_func_code(self, expr, name, params_list):
+    def _generate_func_code(self, expr, func_name, params_list):
         code = self.sympy_to_rust(expr)
         const = isinstance(expr, (sp.Number, sp.Integer))
 
         funcimpl = func_template(
-            name,
+            func_name,
             params_list,
             self.dtype,
             code,
@@ -151,4 +151,4 @@ class SymarsUni:
             # For symbols and literals
             return self.parse_symbol_or_literal(expr)
         else:
-            raise ValueError(f"Invalid expression type: {expr}")
+            raise ValueError(f"Unsupported expression type: {expr}")

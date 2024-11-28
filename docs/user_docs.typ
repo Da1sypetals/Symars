@@ -54,22 +54,23 @@ SymarsUni(dtype: DType, tol: float = 1e-9, debug: bool = False)
 
 + `generate_func(self, name: str, expr)`
 
-   - Purpose: Generates Rust function code for a given SymPy expression.
-   - Parameters:
-     - `name` (`str`): Name of the function to generate.
-     - `expr`: A SymPy expression to translate into Rust code.
-   - Returns: `str` containing the generated Rust function code.
+  - Purpose: Generates Rust function code for a given SymPy expression.
+  - Parameters:
+      - `name` (`str`): Name of the function to generate.
+      - `expr`: A SymPy expression to translate into Rust code.
+  - Returns: `str` containing the generated Rust function code.
+  - Raises: `ValueError` for unsupported or invalid expression types.
 
 
 + `generate_func_given_params(self, name: str, expr, params)`
 
-   - Purpose: Generates Rust function code for a SymPy expression with a specified parameter list.
-   - Parameters:
-     - `name` (`str`): Name of the function.
-     - `expr`: A SymPy expression to translate.
-     - `params` (`list[str]`): List of parameter names for the function.
-   - Returns: `str` containing the generated Rust function code.
-   - Notes: The user is responsible for ensuring the correctness of the parameter list.
+  - Purpose: Generates Rust function code for a SymPy expression with a specified parameter list.
+  - Parameters:
+    - `name` (`str`): Name of the function.
+    - `expr`: A SymPy expression to translate.
+    - `params` (`list[str]`): List of parameter names for the function.
+  - Returns: `str` containing the generated Rust function code.
+  - Notes: The user is responsible for ensuring the correctness of the parameter list.
 
 
 
@@ -97,11 +98,12 @@ SymarsDense(dtype: DType, tol: float = 1e-9, debug: bool = False)
 
 + `generate(self, mat: sp.Matrix, func_name: str) -> dict`
 
-   - Purpose: Generates Rust function implementations for each element of the matrix.
-   - Parameters:
-     - `mat` (`sp.Matrix`): A SymPy matrix whose elements will be converted to Rust code.
-     - `func_name` (`str`): The base name for the functions generated for each matrix element.
-   - Returns: `dict` mapping `(row, col)` indices to their respective Rust function implementation strings.
+  - Purpose: Generates Rust function implementations for each element of the matrix.
+  - Parameters:
+      - `mat` (`sp.Matrix`): A SymPy matrix whose elements will be converted to Rust code.
+      - `func_name` (`str`): The base name for the functions generated for each matrix element.
+  - Returns: `dict` mapping `(row, col)` indices to their respective Rust function implementation strings.
+  - Raises: `ValueError` for unsupported or invalid expression types.
 
 
 
@@ -128,11 +130,12 @@ SymarsNalgebra(dtype: DType, tol: float = 1e-9, debug: bool = False)
 
 + `generate(self, mat: sp.Matrix, func_name: str) -> str`
 
-   - Purpose: Generates Rust code for a matrix operation using `nalgebra`'s `SMatrix` type.
-   - Parameters:
-     - `mat` (`sp.Matrix`): A SymPy matrix whose elements will be converted to Rust code.
-     - `func_name` (`str`): The base name for the Rust matrix function.
-   - Returns: `str` containing the complete Rust code for the matrix operation, including individual element functions and the matrix assembly function.
+  - Purpose: Generates Rust code for a `nalgebra::SMatrix`.
+  - Parameters:
+      - `mat` (`sp.Matrix`): A SymPy matrix whose elements will be converted to Rust code.
+      - `func_name` (`str`): The base name for the Rust matrix function.
+  - Returns: `str` containing the complete Rust code for the matrix operation, including individual element functions and the matrix assembly function.
+  - Raises: `ValueError` for unsupported or invalid expression types.
 
 = Notes
-+ Remember pass legal identifier (in Rust) to the `name` parameter.
++ Remember to pass *legal identifier* (in Rust) to the `name` parameter.
