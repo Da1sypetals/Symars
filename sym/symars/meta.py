@@ -28,7 +28,6 @@ def watermarked(code):
 def func_template(name, param_list, return_value_type, code, inline: bool = True):
     code = f"""
 
-
 {"#[inline]" if inline else ""}
 pub fn {name}({param_list}) -> {return_value_type} {{
 
