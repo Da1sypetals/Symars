@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "symars"
+version = "0.1.0"
+description = "Generate Rust code with Sympy, for both scalars and matrices."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Da1sypetals", email = "da1sypetals.iota@gmail.com" }]
+dependencies = ["sympy"]
+
+[project.urls]
+Homepage = "https://github.com/Da1sypetals/"

@@ -6,6 +6,9 @@
 # having git ignore such leftovers. You can use `.git/info/exclude` to
 # configure your local ignore list.
 
+rust_generated/Cargo.lock
+rust_generated/target/
+
 ## File system
 .DS_Store
 desktop.ini
