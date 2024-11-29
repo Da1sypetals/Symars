@@ -2,7 +2,7 @@ import sympy as sp
 from .meta import DType, func_template, assert_name
 
 
-class SymarsUni:
+class GenScalar:
     def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
         self.dtype = dtype
         self.debug_on = debug

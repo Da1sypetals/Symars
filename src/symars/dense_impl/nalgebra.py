@@ -1,6 +1,6 @@
 import sympy as sp
 from ..meta import DType, funcname, watermarked, assert_name
-from ..dense import SymarsDense
+from ..dense import GenDense
 import itertools
 
 
@@ -32,10 +32,10 @@ pub fn {name}({param_list}) -> nalgebra::SMatrix<{dtype_str}, {m}, {n}> {{
 """
 
 
-class SymarsNalgebra:
+class GenNalgebra:
     def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
         self.dtype = dtype
-        self.dense = SymarsDense(dtype, tol, debug)
+        self.dense = GenDense(dtype, tol, debug)
 
     def generate(self, mat: sp.Matrix, func_name: str):
         entries_impl = self.dense.generate(mat, func_name)

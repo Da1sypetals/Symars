@@ -1,4 +1,5 @@
 from enum import Enum
+import sympy as sp
 
 ###############################################################
 ############################ types ############################
@@ -18,8 +19,24 @@ class DType(Enum):
 ###############################################################
 
 
+def get_parameters(expr):
+    if isinstance(expr, list):
+        parameters = set()
+        for e in expr:
+            parameters = parameters.union(set(get_parameters(e)))
+        return list(sorted(parameters))
+    elif isinstance(expr, (sp.Expr, sp.Matrix)):
+        return sorted(list(map(lambda x: str(x), expr.free_symbols)))
+    else:
+        raise TypeError("Invalid type: expected (list of) SymPy expression or matrix.")
+
+
 def funcname(name, mi, ni):
     return f"{name}_{mi}_{ni}"
+
+
+def funcname_sparse(name, i):
+    return f"{name}_{i}"
 
 
 def watermarked(code):

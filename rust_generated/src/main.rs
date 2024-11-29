@@ -9,4 +9,11 @@ fn main() {
     modify(a.as_mut());
 
     dbg!(a);
+
+    let a: [(usize, usize); 2] = [(1, 2), (3, 4)];
+    let b = a.as_slice();
+
+    b.iter().enumerate().for_each(|(i, &(ix, iy))| {
+        
+    });
 }

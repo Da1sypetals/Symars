@@ -14,19 +14,17 @@
 
 #[inline]
 pub fn test_matrix_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((-1_f64) * (((a) + (h)).exp()))
-        + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c))))
-        + ((((-1_f64) * (h)) + ((f) * (g))).ln())
+    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
 }
 
 #[inline]
 pub fn test_matrix_0_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((c).max(d)) + ((a).min(b))
+    ((a).powi(2)) + ((b).sqrt()) + ((c).recip())
 }
 
 #[inline]
 pub fn test_matrix_0_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((a).powi(2)) + ((b).sqrt()) + ((c).recip())
+    ((c).max(d)) + ((a).min(b))
 }
 
 #[inline]
@@ -59,22 +57,24 @@ pub const fn test_matrix_1_1(
 
 #[inline]
 pub fn test_matrix_1_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
+    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
 }
 
 #[inline]
 pub fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
-}
-
-#[inline]
-pub fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
     ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
 }
 
 #[inline]
+pub fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    (((b).cos()) * ((c).tan())) + ((a).sin())
+}
+
+#[inline]
 pub fn test_matrix_2_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
+    ((-1_f64) * (((a) + (h)).exp()))
+        + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c))))
+        + ((((-1_f64) * (h)) + ((f) * (g))).ln())
 }
 
 pub fn test_matrix(
