@@ -4,7 +4,7 @@ from ..dense import GenDense
 import itertools
 
 
-def nalgebra_template(name, params, dtype_str, return_shape):
+def nalgebra_template(name, params, dtype, return_shape):
     assert_name(name)
     assert (
         len(return_shape) == 2
@@ -12,7 +12,7 @@ def nalgebra_template(name, params, dtype_str, return_shape):
 
     m, n = return_shape
     range_prod = itertools.product(range(m), range(n))
-    param_list = ", ".join([f"{p}: {dtype_str}" for p in params])
+    param_list = ", ".join([f"{p}: {str(dtype)}" for p in params])
     param_invoke = ", ".join(params)
 
     def entry_assign(mi, ni):
@@ -22,7 +22,7 @@ result[({mi}, {ni})] = {funcname(name, mi, ni)}({param_invoke});
 
     assigns = "\n".join([entry_assign(mi, ni) for mi, ni in range_prod])
     return f"""
-pub fn {name}({param_list}) -> nalgebra::SMatrix<{dtype_str}, {m}, {n}> {{
+pub fn {name}({param_list}) -> nalgebra::SMatrix<{str(dtype)}, {m}, {n}> {{
     let mut result = nalgebra::SMatrix::zeros();
 
     {assigns}
@@ -41,7 +41,7 @@ class GenNalgebra:
         entries_impl = self.dense.generate(mat, func_name)
         params = get_parameters(mat)
         entries_impl["matrix"] = nalgebra_template(
-            func_name, params, str(self.dtype), mat.shape
+            func_name, params, self.dtype, mat.shape
         )
 
         output_code = "\n".join(entries_impl.values())

@@ -1,5 +1,5 @@
 import sympy as sp
-from .meta import DType, funcname_sparse, assert_name, watermarked, get_parameters
+from .meta import DType, funcname_vector, assert_name, watermarked, get_parameters
 from .uni import GenScalar
 from sortedcontainers import SortedDict
 
@@ -14,7 +14,7 @@ class GenSparse:
 
     def _generate_comments(self, num_expr: int, func_name: str):
         def comment_item(i):
-            return f"value at index position {i} = {funcname_sparse(func_name, i)}"
+            return f"value at index position {i} = {funcname_vector(func_name, i)}"
 
         comment_content = "\n\t".join([comment_item(i) for i in range(num_expr)])
         return f"/*\n\n\t{comment_content}\n\n*/\n\n"
@@ -28,7 +28,7 @@ class GenSparse:
         impls = SortedDict(
             {
                 str(i): self.gen_scalar.generate_func_given_params(
-                    funcname_sparse(func_name, i), exprs[i], params
+                    funcname_vector(func_name, i), exprs[i], params
                 )
                 for i in range(num_expr)
             }
@@ -46,7 +46,7 @@ class GenSparse:
 
         def entry_assign(i):
             return f"""
-    triplets.push((indices[{i}].0, indices[{i}].1, {funcname_sparse(func_name, i)}({param_invoke})));
+    triplets.push((indices[{i}].0, indices[{i}].1, {funcname_vector(func_name, i)}({param_invoke})));
 """
 
         assigns = "\n".join([entry_assign(i) for i in range(num_expr)])

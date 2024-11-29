@@ -12,6 +12,9 @@ class DType(Enum):
     def __str__(self) -> str:
         return "f32" if self == DType.F32 else "f64"
 
+    def suffix(self) -> str:
+        return f"_{str(self)}"
+
 
 ###############################################################
 ########################## functions ##########################
@@ -37,7 +40,7 @@ def funcname(name, mi, ni):
     return f"{name}_{mi}_{ni}"
 
 
-def funcname_sparse(name, i):
+def funcname_vector(name, i):
     return f"{name}_{i}"
 
 
