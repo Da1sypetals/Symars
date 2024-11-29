@@ -6,6 +6,10 @@
 # having git ignore such leftovers. You can use `.git/info/exclude` to
 # configure your local ignore list.
 
+# package metadata
+*.egg-info
+
+
 rust_generated/Cargo.lock
 rust_generated/target/
 
