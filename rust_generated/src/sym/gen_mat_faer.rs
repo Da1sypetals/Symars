@@ -14,17 +14,17 @@
 
 #[inline]
 pub fn test_matrix_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
+    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
 }
 
 #[inline]
 pub fn test_matrix_0_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((a).powi(2)) + ((b).sqrt()) + ((c).recip())
+    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 }
 
 #[inline]
 pub fn test_matrix_0_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((c).max(d)) + ((a).min(b))
+    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
 }
 
 #[inline]
@@ -57,17 +57,17 @@ pub const fn test_matrix_1_1(
 
 #[inline]
 pub fn test_matrix_1_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
+    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
 }
 
 #[inline]
 pub fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
+    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
 }
 
 #[inline]
 pub fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
-    (((b).cos()) * ((c).tan())) + ((a).sin())
+    ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
 }
 
 #[inline]

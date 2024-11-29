@@ -21,6 +21,6 @@ class GenDense:
                 funcimpl = self.gen_scalar.generate_func_given_params(
                     name, mat[mi, ni], params
                 )
-                entries[(mi, ni)] = funcimpl
+                entries[str((mi, ni))] = funcimpl
 
         return entries
