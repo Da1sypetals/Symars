@@ -12,4 +12,4 @@ authors = [{ name = "Da1sypetals", email = "da1sypetals.iota@gmail.com" }]
 dependencies = ["sympy"]
 
 [project.urls]
-Homepage = "https://github.com/Da1sypetals/"
+Homepage = "https://github.com/Da1sypetals/Symars"
