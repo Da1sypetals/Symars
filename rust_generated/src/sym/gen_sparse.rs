@@ -28,52 +28,54 @@
 */
 
 #[inline]
-pub fn exprs_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-    (((b).cos()) * ((c).tan())) + ((a).sin())
+pub fn exprs_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    ((a).powi(2)) + ((b).sqrt()) + ((c).recip())
 }
 
 #[inline]
-pub fn exprs_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
-}
-
-#[inline]
-pub fn exprs_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub fn exprs_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
     (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 }
 
 #[inline]
-pub fn exprs_3(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-    ((c).max(d)) + ((a).min(b))
-}
-
-#[inline]
-pub fn exprs_4(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
-}
-
-#[inline]
-pub fn exprs_5(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
-}
-
-#[inline]
-pub fn exprs_6(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-    ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
-}
-
-#[inline]
-pub fn exprs_7(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub fn exprs_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
     (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
 }
 
 #[inline]
-pub fn exprs_8(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub fn exprs_3(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
+}
+
+#[inline]
+pub fn exprs_4(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
+}
+
+#[inline]
+pub fn exprs_5(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
+}
+
+#[inline]
+pub fn exprs_6(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    ((-1_f64) * (((a) + (h)).exp()))
+        + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c))))
+        + ((((-1_f64) * (h)) + ((f) * (g))).ln())
+}
+
+#[inline]
+pub fn exprs_7(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+    ((c).max(d)) + ((a).min(b))
+}
+
+#[inline]
+pub fn exprs_8(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
     (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
 }
 
 #[inline]
-pub const fn exprs_9(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub const fn exprs_9(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
     0_f64
 }
 
@@ -86,24 +88,26 @@ pub fn exprs(
     d: f64,
     e: f64,
     f: f64,
+    g: f64,
+    h: f64,
 ) {
-    triplets.push((indices[0].0, indices[0].1, exprs_0(a, b, c, d, e, f)));
+    triplets.push((indices[0].0, indices[0].1, exprs_0(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[1].0, indices[1].1, exprs_1(a, b, c, d, e, f)));
+    triplets.push((indices[1].0, indices[1].1, exprs_1(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[2].0, indices[2].1, exprs_2(a, b, c, d, e, f)));
+    triplets.push((indices[2].0, indices[2].1, exprs_2(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[3].0, indices[3].1, exprs_3(a, b, c, d, e, f)));
+    triplets.push((indices[3].0, indices[3].1, exprs_3(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[4].0, indices[4].1, exprs_4(a, b, c, d, e, f)));
+    triplets.push((indices[4].0, indices[4].1, exprs_4(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[5].0, indices[5].1, exprs_5(a, b, c, d, e, f)));
+    triplets.push((indices[5].0, indices[5].1, exprs_5(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[6].0, indices[6].1, exprs_6(a, b, c, d, e, f)));
+    triplets.push((indices[6].0, indices[6].1, exprs_6(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[7].0, indices[7].1, exprs_7(a, b, c, d, e, f)));
+    triplets.push((indices[7].0, indices[7].1, exprs_7(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[8].0, indices[8].1, exprs_8(a, b, c, d, e, f)));
+    triplets.push((indices[8].0, indices[8].1, exprs_8(a, b, c, d, e, f, g, h)));
 
-    triplets.push((indices[9].0, indices[9].1, exprs_9(a, b, c, d, e, f)));
+    triplets.push((indices[9].0, indices[9].1, exprs_9(a, b, c, d, e, f, g, h)));
 }
