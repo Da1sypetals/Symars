@@ -5,6 +5,7 @@ Build dense small matrix from symbolic dense matrix expressions.
 # Requirements
 ```
 sympy
+sortedcontainers
 ```
 
 # Use
