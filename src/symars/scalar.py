@@ -113,6 +113,12 @@ class GenScalar:
         elif isinstance(expr, sp.log):
             return f"({self.sympy_to_rust(expr.args[0])}).ln()"
 
+        # other functions
+        elif isinstance(expr, sp.sinc):
+            arg = self.sympy_to_rust(expr.args[0])
+            sinc_nonzero = f"((({arg}).sin()) / {arg})"
+            return f"(if {arg} != 0{self.dtype.suffix()} {{{sinc_nonzero}}} else {{{1}{self.dtype.suffix()}}})"
+
         # discrete and nondifferentiable
         elif isinstance(expr, sp.floor):
             return f"({self.sympy_to_rust(expr.args[0])}).floor()"
@@ -145,9 +151,9 @@ class GenScalar:
             base = self.sympy_to_rust(expr.args[0])
             exponent = expr.args[1]
             if isinstance(exponent, sp.Integer):
-                if exponent == 1:
+                if exponent == 1 or isinstance(exponent, sp.core.numbers.One):
                     return f"({base})"
-                if exponent == -1:
+                if exponent == -1 or isinstance(exponent, sp.core.numbers.NegativeOne):
                     return f"({base}).recip()"
                 return f"({base}).powi({exponent})"
             else:

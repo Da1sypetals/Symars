@@ -1,6 +1,5 @@
 # Symars
 Generate Rust code from symbolic vector and matrix expressions.
-Build dense small matrix from symbolic dense matrix expressions.
 
 # Requirements
 ```
@@ -44,3 +43,7 @@ signum // sp.sign
 abs
 
 ```
+
+# Note
+1. Please handle NaN and inf carefully by yourself.
+2. We don't do indent/format. `cargo fmt` do it for us.
