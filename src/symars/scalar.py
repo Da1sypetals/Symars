@@ -82,6 +82,8 @@ class GenScalar:
             return f"({self.sympy_to_rust(expr.args[0])}).cos()"
         elif isinstance(expr, sp.tan):
             return f"({self.sympy_to_rust(expr.args[0])}).tan()"
+        elif isinstance(expr, sp.cot):
+            return f"({self.sympy_to_rust(expr.args[0])}).tan().recip()"
         elif isinstance(expr, sp.asin):
             return f"({self.sympy_to_rust(expr.args[0])}).asin()"
         elif isinstance(expr, sp.acos):
