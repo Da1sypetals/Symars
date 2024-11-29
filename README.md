@@ -17,6 +17,7 @@ sympy
 ## Supported linear algebra crate 
 - `nalgebra`, returns a matrix;
 - `faer`, passes in a mutable slice of matrix and modifies it.
+- `faer-sparse`, which builds a sparse matrix with its triplet representation stored in `Vec<(usize, usize, value_type)>`.
 
 > If you want to support your own linear algebra crate, refer to `nalgebra.py`.
 
