@@ -1,6 +1,6 @@
 import sympy as sp
 from .meta import DType, funcname, assert_name, get_parameters
-from .uni import GenScalar
+from .scalar import GenScalar
 from sortedcontainers import SortedDict
 
 

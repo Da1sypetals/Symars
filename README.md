@@ -11,13 +11,16 @@ sympy
 - `pip install .`
 - See `examples.ipynb`.
 - Refer to `docs/user_docs.pdf` for details.
+- See `rust_generated/src/sym/*.rs` for sample generated code.
 
 # Support
 
 ## Supported linear algebra crate 
-- `nalgebra`, returns a matrix;
+- `nalgebra`, returns a matrix (including row and column vectors, which share the underlying type `nalgebra::SMatrix`)
 - `faer`, passes in a mutable slice of matrix and modifies it.
-- `faer-sparse`, which builds a sparse matrix with its triplet representation stored in `Vec<(usize, usize, value_type)>`.
+  - Both `Row`, `Col` and `Mat` are supported.
+- Built-in array `[f32; N]` and `[f64; N]` for vector.
+- Sparse matrix with its triplet representation stored in `Vec<(usize, usize, value_type)>`.
 
 > If you want to support your own linear algebra crate, refer to `nalgebra.py`.
 

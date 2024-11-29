@@ -16,11 +16,6 @@ class GenScalar:
             print("[symars debug] ", end="")
             print(*args, **kw)
 
-    @property
-    def literal_suffix(self):
-        """Return the appropriate suffix for the type (either F32 or F64)."""
-        return f"_{str(self.dtype)}"
-
     def parse_symbol_or_literal(self, expr):
         """Parse the input and ensure it's either a symbol or a literal (int or float)."""
         if isinstance(expr, sp.Symbol):
@@ -31,8 +26,8 @@ class GenScalar:
             # It's a literal, return with the correct suffix.
             # convert all to float.
             self.debug(f"literal: {expr}")
-            self.debug(f"{expr}{self.literal_suffix}")
-            return f"{expr}{self.literal_suffix}"
+            self.debug(f"{expr}{self.dtype.suffix()}")
+            return f"{expr}{self.dtype.suffix()}"
         else:
             # Raise an error if neither symbol nor literal
             raise ValueError(

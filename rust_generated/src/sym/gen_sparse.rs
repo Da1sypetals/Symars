@@ -34,7 +34,7 @@
 #[inline]
 pub  fn exprs_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * (((a) + (h)).exp())) + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c)))) + ((((-1_f64) * (h)) + ((f) * (g))).ln())
+    (((b).cos()) * ((c).tan())) + ((a).sin())
 
 }
 
@@ -44,7 +44,7 @@ pub  fn exprs_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
+    ((-1_f64) * (((a) + (h)).exp())) + ((d) * ((e).recip()) * ((a) + (b) + ((-1_f64) * (c)))) + ((((-1_f64) * (h)) + ((f) * (g))).ln())
 
 }
 
@@ -54,7 +54,7 @@ pub  fn exprs_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * ((d).atan2(c))) + ((b).acos()) + ((a).asin())
+    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 
 }
 
@@ -64,7 +64,7 @@ pub  fn exprs_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_3(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
+    ((c).max(d)) + ((a).min(b))
 
 }
 
@@ -84,7 +84,7 @@ pub  fn exprs_4(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_5(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
+    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
 
 }
 
@@ -94,7 +94,7 @@ pub  fn exprs_5(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_6(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((c).max(d)) + ((a).min(b))
+    ((-1_f64) * (((c).cosh()).tanh())) + (((b).sqrt()).exp()) + (((a).ln()).sin())
 
 }
 
@@ -104,7 +104,7 @@ pub  fn exprs_6(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_7(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * (((c).cosh()).tanh())) + (((b).sqrt()).exp()) + (((a).ln()).sin())
+    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
 
 }
 
@@ -114,7 +114,7 @@ pub  fn exprs_7(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) 
 #[inline]
 pub  fn exprs_8(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
+    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
 
 }
 
