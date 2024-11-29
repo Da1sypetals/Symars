@@ -17,9 +17,9 @@
 
 
 #[inline]
-pub  fn test_col_0_0(a: f32, b: f32, c: f32, d: f32, e: f32, f: f32) -> f32 {
+pub  fn test_col_0_0(a: f32, b: f32, c: f32, d: f32) -> f32 {
 
-    (-3_f32) + ((2_f32) * (b)) + ((3.50000000000000_f32) * (a))
+    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
 
 }
 
@@ -27,7 +27,7 @@ pub  fn test_col_0_0(a: f32, b: f32, c: f32, d: f32, e: f32, f: f32) -> f32 {
 
 
 #[inline]
-pub const fn test_col_1_0(a: f32, b: f32, c: f32, d: f32, e: f32, f: f32) -> f32 {
+pub const fn test_col_1_0(a: f32, b: f32, c: f32, d: f32) -> f32 {
 
     1_f32
 
@@ -37,23 +37,23 @@ pub const fn test_col_1_0(a: f32, b: f32, c: f32, d: f32, e: f32, f: f32) -> f32
 
 
 #[inline]
-pub  fn test_col_2_0(a: f32, b: f32, c: f32, d: f32, e: f32, f: f32) -> f32 {
+pub  fn test_col_2_0(a: f32, b: f32, c: f32, d: f32) -> f32 {
 
-    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
+    ((c).max(d)) + ((a).min(b))
 
 }
 
 
-pub fn test_col(mut vec: faer::ColMut<f32>, a: f32, b: f32, c: f32, d: f32, e: f32, f: f32) {
+pub fn test_col(mut vec: faer::ColMut<f32>, a: f32, b: f32, c: f32, d: f32) {
 
     
-vec[0] = test_col_0_0(a, b, c, d, e, f);
+vec[0] = test_col_0_0(a, b, c, d);
 
 
-vec[1] = test_col_1_0(a, b, c, d, e, f);
+vec[1] = test_col_1_0(a, b, c, d);
 
 
-vec[2] = test_col_2_0(a, b, c, d, e, f);
+vec[2] = test_col_2_0(a, b, c, d);
 
     
 }
@@ -76,7 +76,7 @@ vec[2] = test_col_2_0(a, b, c, d, e, f);
 
 
 #[inline]
-pub const fn test_row_0_0(d: f64, e: f64, f: f64) -> f64 {
+pub const fn test_row_0_0(a: f64, b: f64) -> f64 {
 
     0_f64
 
@@ -86,7 +86,7 @@ pub const fn test_row_0_0(d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub const fn test_row_0_1(d: f64, e: f64, f: f64) -> f64 {
+pub const fn test_row_0_1(a: f64, b: f64) -> f64 {
 
     1_f64
 
@@ -96,23 +96,23 @@ pub const fn test_row_0_1(d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_row_0_2(d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_row_0_2(a: f64, b: f64) -> f64 {
 
-    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
+    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 
 }
 
 
-pub fn test_row(mut vec: faer::RowMut<f64>, d: f64, e: f64, f: f64) {
+pub fn test_row(mut vec: faer::RowMut<f64>, a: f64, b: f64) {
 
     
-vec[0] = test_row_0_0(d, e, f);
+vec[0] = test_row_0_0(a, b);
 
 
-vec[1] = test_row_0_1(d, e, f);
+vec[1] = test_row_0_1(a, b);
 
 
-vec[2] = test_row_0_2(d, e, f);
+vec[2] = test_row_0_2(a, b);
 
     
 }

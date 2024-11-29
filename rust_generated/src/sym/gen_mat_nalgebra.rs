@@ -17,19 +17,9 @@
 
 
 #[inline]
-pub  fn test_matrix_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_matrix_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((c).max(d)) + ((a).min(b))
-
-}
-
-
-
-
-#[inline]
-pub  fn test_matrix_0_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-
-    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
+    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
 
 }
 
@@ -37,9 +27,9 @@ pub  fn test_matrix_0_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_matrix_0_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_matrix_0_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    (((b).cos()) * ((c).tan())) + ((a).sin())
+    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
 
 }
 
@@ -47,7 +37,17 @@ pub  fn test_matrix_0_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub const fn test_matrix_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_matrix_0_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+
+    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
+
+}
+
+
+
+
+#[inline]
+pub const fn test_matrix_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
     0_f64
 
@@ -57,7 +57,7 @@ pub const fn test_matrix_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> 
 
 
 #[inline]
-pub const fn test_matrix_1_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub const fn test_matrix_1_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
     1_f64
 
@@ -67,19 +67,9 @@ pub const fn test_matrix_1_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> 
 
 
 #[inline]
-pub  fn test_matrix_1_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_matrix_1_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
-
-}
-
-
-
-
-#[inline]
-pub  fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-
-    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
+    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 
 }
 
@@ -87,9 +77,9 @@ pub  fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_matrix_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
+    ((-1_f64) * (((((((d) * ((e).recip())) + ((((-1_f64) * (h)) + ((f) * (g))).ln())).abs()).cbrt()) * ((a) + (b) + ((-1_f64) * (c))) * ((c).cosh())).tanh())) + (((((b).sqrt()).exp()) + (((a).ln()).sin())).abs())
 
 }
 
@@ -97,42 +87,52 @@ pub  fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_matrix_2_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_matrix_2_1(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
+    ((c).max(d)) + ((a).min(b))
 
 }
 
 
-pub fn test_matrix(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> nalgebra::SMatrix<f64, 3, 3> {
+
+
+#[inline]
+pub  fn test_matrix_2_2(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+
+    ((a).powi(2)) + ((b).sqrt()) + ((c).recip())
+
+}
+
+
+pub fn test_matrix(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> nalgebra::SMatrix<f64, 3, 3> {
     let mut result = nalgebra::SMatrix::zeros();
 
     
-result[(0, 0)] = test_matrix_0_0(a, b, c, d, e, f);
+result[(0, 0)] = test_matrix_0_0(a, b, c, d, e, f, g, h);
 
 
-result[(0, 1)] = test_matrix_0_1(a, b, c, d, e, f);
+result[(0, 1)] = test_matrix_0_1(a, b, c, d, e, f, g, h);
 
 
-result[(0, 2)] = test_matrix_0_2(a, b, c, d, e, f);
+result[(0, 2)] = test_matrix_0_2(a, b, c, d, e, f, g, h);
 
 
-result[(1, 0)] = test_matrix_1_0(a, b, c, d, e, f);
+result[(1, 0)] = test_matrix_1_0(a, b, c, d, e, f, g, h);
 
 
-result[(1, 1)] = test_matrix_1_1(a, b, c, d, e, f);
+result[(1, 1)] = test_matrix_1_1(a, b, c, d, e, f, g, h);
 
 
-result[(1, 2)] = test_matrix_1_2(a, b, c, d, e, f);
+result[(1, 2)] = test_matrix_1_2(a, b, c, d, e, f, g, h);
 
 
-result[(2, 0)] = test_matrix_2_0(a, b, c, d, e, f);
+result[(2, 0)] = test_matrix_2_0(a, b, c, d, e, f, g, h);
 
 
-result[(2, 1)] = test_matrix_2_1(a, b, c, d, e, f);
+result[(2, 1)] = test_matrix_2_1(a, b, c, d, e, f, g, h);
 
 
-result[(2, 2)] = test_matrix_2_2(a, b, c, d, e, f);
+result[(2, 2)] = test_matrix_2_2(a, b, c, d, e, f, g, h);
 
 
     result

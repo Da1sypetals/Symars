@@ -76,6 +76,8 @@ class GenScalar:
 
     def sympy_to_rust(self, expr):
         """Translate a SymPy expression to Rust code."""
+
+        # trigonomics
         if isinstance(expr, sp.sin):
             return f"({self.sympy_to_rust(expr.args[0])}).sin()"
         elif isinstance(expr, sp.cos):
@@ -90,6 +92,8 @@ class GenScalar:
             return f"({self.sympy_to_rust(expr.args[0])}).acos()"
         elif isinstance(expr, sp.atan2):
             return f"({self.sympy_to_rust(expr.args[1])}).atan2({self.sympy_to_rust(expr.args[0])})"
+
+        # hyperbolic trigonomics
         elif isinstance(expr, sp.sinh):
             return f"({self.sympy_to_rust(expr.args[0])}).sinh()"
         elif isinstance(expr, sp.cosh):
@@ -102,14 +106,24 @@ class GenScalar:
             return f"({self.sympy_to_rust(expr.args[0])}).acosh()"
         elif isinstance(expr, sp.atanh):
             return f"({self.sympy_to_rust(expr.args[0])}).atanh()"
+
+        # euler constant related
         elif isinstance(expr, sp.exp):
             return f"({self.sympy_to_rust(expr.args[0])}).exp()"
+        elif isinstance(expr, sp.log):
+            return f"({self.sympy_to_rust(expr.args[0])}).ln()"
+
+        # discrete and nondifferentiable
         elif isinstance(expr, sp.floor):
             return f"({self.sympy_to_rust(expr.args[0])}).floor()"
         elif isinstance(expr, sp.ceiling):
             return f"({self.sympy_to_rust(expr.args[0])}).ceil()"
-        elif isinstance(expr, sp.log):
-            return f"({self.sympy_to_rust(expr.args[0])}).ln()"
+        elif isinstance(expr, sp.sign):
+            return f"({self.sympy_to_rust(expr.args[0])}).signum()"
+        elif isinstance(expr, sp.Abs):
+            return f"({self.sympy_to_rust(expr.args[0])}).abs()"
+
+        # min / max
         elif isinstance(expr, sp.Min):
             if len(expr.args) != 2:
                 raise ValueError("Min and Max should have 2 arguments!")
@@ -118,8 +132,8 @@ class GenScalar:
             if len(expr.args) != 2:
                 raise ValueError("Min and Max should have 2 arguments!")
             return f"({self.sympy_to_rust(expr.args[0])}).max({self.sympy_to_rust(expr.args[1])})"
-        elif isinstance(expr, sp.sign):
-            return f"({self.sympy_to_rust(expr.args[0])}).signum()"
+
+        # operators
         elif isinstance(expr, sp.Add):
             operands = [f"({self.sympy_to_rust(arg)})" for arg in expr.args]
             return " + ".join(operands)
@@ -137,8 +151,13 @@ class GenScalar:
                     return f"({base}).recip()"
                 return f"({base}).powi({exponent})"
             else:
-                if isinstance(expr.args[1], sp.core.numbers.Half):
+                if isinstance(exponent, sp.core.numbers.Half):
                     return f"({base}).sqrt()"
+
+                if exponent == sp.Rational(1, 2):
+                    return f"({base}).sqrt()"
+                if exponent == sp.Rational(1, 3):
+                    return f"({base}).cbrt()"
 
                 if isinstance(exponent, sp.Number) and self.float_eq(exponent, 0.5):
                     return f"({base}).sqrt()"

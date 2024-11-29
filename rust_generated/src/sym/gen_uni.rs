@@ -16,8 +16,8 @@
 
 
 #[inline]
-pub  fn nested_expressions(a: f64, b: f64, c: f64) -> f64 {
+pub  fn many_many(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * (((c).cosh()).tanh())) + (((b).sqrt()).exp()) + (((a).ln()).sin())
+    ((-1_f64) * (((((((d) * ((e).recip())) + ((((-1_f64) * (h)) + ((f) * (g))).ln())).abs()).cbrt()) * ((a) + (b) + ((-1_f64) * (c))) * ((c).cosh())).tanh())) + ((((((b) + (((c) + ((-1_f64) * (a))).cbrt())).sqrt()).exp()) + (((a).ln()).sin())).abs())
 
 }

@@ -33,7 +33,7 @@ sortedcontainers
 + - * /
 powf, sqrt
 powi // only for constant integers
-sin, cos, tan, asin, acos, atan2
+sin, cos, tan, cot, asin, acos, atan2
 sinh, cosh, tanh, asinh, acosh, atanh
 exp, exp2
 floor, ceil // behavior of frac is different in rust and sympy.
@@ -41,5 +41,6 @@ ln // sp.log(x)
 log // sp.log(x, base)
 min, max // sp.Min, sp.Max; note to use only for normal numbers (not inf, nan)
 signum // sp.sign
+abs
 
 ```

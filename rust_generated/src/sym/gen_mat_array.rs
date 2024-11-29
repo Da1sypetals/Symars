@@ -17,19 +17,9 @@
 
 
 #[inline]
-pub  fn test_vector_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_vector_0_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((c).max(d)) + ((a).min(b))
-
-}
-
-
-
-
-#[inline]
-pub  fn test_vector_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-
-    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
+    (((c) + ((-1_f64) * (d))).ceil()) + (((a) + (b)).floor())
 
 }
 
@@ -37,9 +27,9 @@ pub  fn test_vector_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_vector_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_vector_1_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    (((b).cos()) * ((c).tan())) + ((a).sin())
+    (((b).exp()) * ((a).ln())) + (((c) + (d)).ln())
 
 }
 
@@ -47,7 +37,17 @@ pub  fn test_vector_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub const fn test_vector_3_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_vector_2_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+
+    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
+
+}
+
+
+
+
+#[inline]
+pub const fn test_vector_3_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
     0_f64
 
@@ -57,7 +57,7 @@ pub const fn test_vector_3_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> 
 
 
 #[inline]
-pub const fn test_vector_4_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub const fn test_vector_4_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
     1_f64
 
@@ -67,19 +67,9 @@ pub const fn test_vector_4_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> 
 
 
 #[inline]
-pub  fn test_vector_5_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_vector_5_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((-1_f64) * ((f).tanh())) + ((e).cosh()) + ((d).sinh())
-
-}
-
-
-
-
-#[inline]
-pub  fn test_vector_6_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
-
-    ((-1_f64) * (((c) + (d)).signum())) + (((a) + ((-1_f64) * (b))).signum())
+    (-3_f64) + ((2_f64) * (b)) + ((3.50000000000000_f64) * (a))
 
 }
 
@@ -87,9 +77,9 @@ pub  fn test_vector_6_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_vector_7_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_vector_6_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    ((d).powf((e) + (f))) + (((((a) + (b)).powi(2)) * ((c).exp())).sqrt())
+    ((-1_f64) * (((((((d) * ((e).recip())) + ((((-1_f64) * (h)) + ((f) * (g))).ln())).abs()).cbrt()) * ((a) + (b) + ((-1_f64) * (c))) * ((c).cosh())).tanh())) + (((((b).sqrt()).exp()) + (((a).ln()).sin())).abs())
 
 }
 
@@ -97,42 +87,52 @@ pub  fn test_vector_7_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
 
 
 #[inline]
-pub  fn test_vector_8_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> f64 {
+pub  fn test_vector_7_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
 
-    (((d).exp()).max((e).cos())) + (((c).sin()).min(((a) + (b)).ln()))
+    ((c).max(d)) + ((a).min(b))
 
 }
 
 
-pub fn test_vector(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64) -> [f64; 9] {
+
+
+#[inline]
+pub  fn test_vector_8_0(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> f64 {
+
+    ((a).powi(2)) + ((b).sqrt()) + ((c).recip())
+
+}
+
+
+pub fn test_vector(a: f64, b: f64, c: f64, d: f64, e: f64, f: f64, g: f64, h: f64) -> [f64; 9] {
 
     let mut vec: [f64; 9] = [0_f64; 9];
     
-vec[0] = test_vector_0_0(a, b, c, d, e, f);
+vec[0] = test_vector_0_0(a, b, c, d, e, f, g, h);
 
 
-vec[1] = test_vector_1_0(a, b, c, d, e, f);
+vec[1] = test_vector_1_0(a, b, c, d, e, f, g, h);
 
 
-vec[2] = test_vector_2_0(a, b, c, d, e, f);
+vec[2] = test_vector_2_0(a, b, c, d, e, f, g, h);
 
 
-vec[3] = test_vector_3_0(a, b, c, d, e, f);
+vec[3] = test_vector_3_0(a, b, c, d, e, f, g, h);
 
 
-vec[4] = test_vector_4_0(a, b, c, d, e, f);
+vec[4] = test_vector_4_0(a, b, c, d, e, f, g, h);
 
 
-vec[5] = test_vector_5_0(a, b, c, d, e, f);
+vec[5] = test_vector_5_0(a, b, c, d, e, f, g, h);
 
 
-vec[6] = test_vector_6_0(a, b, c, d, e, f);
+vec[6] = test_vector_6_0(a, b, c, d, e, f, g, h);
 
 
-vec[7] = test_vector_7_0(a, b, c, d, e, f);
+vec[7] = test_vector_7_0(a, b, c, d, e, f, g, h);
 
 
-vec[8] = test_vector_8_0(a, b, c, d, e, f);
+vec[8] = test_vector_8_0(a, b, c, d, e, f, g, h);
 
     
     vec
