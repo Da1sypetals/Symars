@@ -1,12 +1,25 @@
 import sympy as sp
-from .meta import DType, func_template, assert_name
+from .meta import DType, func_template, assert_name, is_constant, CONSTANTS
 
 
 class GenScalar:
-    def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
+    def __init__(
+        self,
+        dtype: DType,
+        tol: float = 1e-9,
+        precision_digit: int = 20,
+        debug: bool = False,
+    ):
+        assert (
+            isinstance(precision_digit, int) and precision_digit > 0
+        ), f"Precision digit shoud be an unsigned integer, found {precision_digit}"
+        assert isinstance(dtype, DType), f"Expected a variant of DType, found {dtype}"
+        assert isinstance(tol, float), f"Expected floating point tolerance, found {tol}"
+
         self.dtype = dtype
         self.debug_on = debug
         self.tol = tol
+        self.precision_digit = precision_digit
 
     def float_eq(self, a, b):
         return sp.Abs(a - b) < self.tol
@@ -16,22 +29,29 @@ class GenScalar:
             print("[symars debug] ", end="")
             print(*args, **kw)
 
-    def parse_symbol_or_literal(self, expr):
+    def parse_constant(self, expr):
         """Parse the input and ensure it's either a symbol or a literal (int or float)."""
-        if isinstance(expr, sp.Symbol):
+        # the most specific ones: constants
+        if expr in CONSTANTS:
+            return f"{expr.evalf(self.precision_digit)}{self.dtype.suffix()}"
+        elif isinstance(expr, sp.Symbol):
             # It's a symbol, return its name (Rust variable)
             self.debug(f"symbol: {expr}")
             return str(expr)
-        elif isinstance(expr, (int, float, sp.Integer, sp.Number)):
+        elif isinstance(expr, sp.Rational):
+            self.debug(f"{expr.evalf(self.precision_digit)}{self.dtype.suffix()}")
+            return f"{expr.evalf(self.precision_digit)}{self.dtype.suffix()}"
+        elif isinstance(expr, (int, float, sp.Integer, sp.Float)):
             # It's a literal, return with the correct suffix.
             # convert all to float.
             self.debug(f"literal: {expr}")
             self.debug(f"{expr}{self.dtype.suffix()}")
             return f"{expr}{self.dtype.suffix()}"
+
         else:
             # Raise an error if neither symbol nor literal
             raise ValueError(
-                f"Invalid expression: {expr}. Must be a symbol or a literal."
+                f"Invalid constant expression: {expr}. Must be a symbol, literal or Rational."
             )
 
     def generate_func(self, func_name: str, expr):
@@ -91,7 +111,10 @@ class GenScalar:
         elif isinstance(expr, sp.acos):
             return f"({self.sympy_to_rust(expr.args[0])}).acos()"
         elif isinstance(expr, sp.atan2):
-            return f"({self.sympy_to_rust(expr.args[1])}).atan2({self.sympy_to_rust(expr.args[0])})"
+            # Mind the order here! the order is SAME in SymPy and Rust.
+            y = self.sympy_to_rust(expr.args[0])
+            x = self.sympy_to_rust(expr.args[1])
+            return f"({y}).atan2({x})"
 
         # hyperbolic trigonomics
         elif isinstance(expr, sp.sinh):
@@ -125,7 +148,8 @@ class GenScalar:
         elif isinstance(expr, sp.ceiling):
             return f"({self.sympy_to_rust(expr.args[0])}).ceil()"
         elif isinstance(expr, sp.sign):
-            return f"({self.sympy_to_rust(expr.args[0])}).signum()"
+            expr_str = f"{self.sympy_to_rust(expr.args[0])}"
+            return f"if ({expr_str}).abs() == 0.0{self.dtype.suffix()} {{ {expr_str} }} else {{ ({expr_str}).signum() }}"
         elif isinstance(expr, sp.Abs):
             return f"({self.sympy_to_rust(expr.args[0])}).abs()"
 
@@ -144,6 +168,10 @@ class GenScalar:
             operands = [f"({self.sympy_to_rust(arg)})" for arg in expr.args]
             return " + ".join(operands)
         elif isinstance(expr, sp.Mul):
+            if expr.args[0] == -1:
+                val = self.sympy_to_rust(sp.Mul(*(expr.args[1:])))
+                return f"-({val})"
+
             operands = [f"({self.sympy_to_rust(arg)})" for arg in expr.args]
             return " * ".join(operands)
         elif isinstance(expr, sp.Pow):
@@ -169,8 +197,8 @@ class GenScalar:
                     return f"({base}).sqrt()"
 
                 return f"({base}).powf({self.sympy_to_rust(exponent)})"
-        elif isinstance(expr, (sp.Symbol, int, float, sp.Integer, sp.Number)):
+        elif is_constant(expr):
             # For symbols and literals
-            return self.parse_symbol_or_literal(expr)
+            return self.parse_constant(expr)
         else:
             raise ValueError(f"Unsupported expression type: {expr}")

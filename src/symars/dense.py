@@ -5,9 +5,15 @@ from sortedcontainers import SortedDict
 
 
 class GenDense:
-    def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
+    def __init__(
+        self,
+        dtype: DType,
+        tol: float = 1e-9,
+        precision_digit: int = 20,
+        debug: bool = False,
+    ):
         self.dtype = dtype
-        self.gen_scalar = GenScalar(dtype, tol, debug)
+        self.gen_scalar = GenScalar(dtype, tol, precision_digit, debug)
 
     def generate(self, mat: sp.Matrix, func_name: str):
         assert_name(func_name)

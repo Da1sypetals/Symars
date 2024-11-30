@@ -40,9 +40,15 @@ pub fn {name}({param_list}) -> {arr_type} {{
 
 
 class GenArrayVec:
-    def __init__(self, dtype: DType, tol: float = 1e-9, debug: bool = False):
+    def __init__(
+        self,
+        dtype: DType,
+        tol: float = 1e-9,
+        precision_digit: int = 20,
+        debug: bool = False,
+    ):
         self.dtype = dtype
-        self.dense = GenDense(dtype, tol, debug)
+        self.dense = GenDense(dtype, tol, precision_digit, debug)
 
     def generate(self, mat: sp.Matrix, func_name: str):
         vecshape = get_vecshape(mat)

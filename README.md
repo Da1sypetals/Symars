@@ -45,5 +45,6 @@ abs
 ```
 
 # Note
-1. Please handle NaN and inf carefully by yourself.
-2. We don't do indent/format. `cargo fmt` do it for us.
+1. Some functions are ambiguous (for example, `sign`). Please refer to documentation for their semantics.
+2. Please handle NaN and inf carefully by yourself.
+3. We don't do indent/format. `cargo fmt` do it for us.

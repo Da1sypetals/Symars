@@ -1,4 +1,13 @@
 from enum import Enum
+import sympy as sp
+from sympy.core.numbers import (
+    Exp1,
+    Pi,
+    EulerGamma,
+    GoldenRatio,
+    Catalan,
+    TribonacciConstant,
+)
 
 ###############################################################
 ############################ types ############################
@@ -19,6 +28,13 @@ class DType(Enum):
 ###############################################################
 ########################## functions ##########################
 ###############################################################
+
+
+def is_constant(expr: sp.Expr):
+    return (
+        isinstance(expr, (sp.Symbol, int, float, sp.Integer, sp.Number, sp.Rational))
+        or expr in CONSTANTS
+    )
 
 
 def get_parameters(expr):
@@ -94,6 +110,15 @@ def assert_name(name: str):
 ###############################################################
 ########################## constants ##########################
 ###############################################################
+
+CONSTANTS = {
+    Exp1(),
+    Pi(),
+    EulerGamma(),
+    GoldenRatio(),
+    Catalan(),
+    TribonacciConstant(),
+}
 
 HEAD = """
 /*
