@@ -1,5 +1,12 @@
 import sympy as sp
-from .meta import DType, func_template, assert_name, is_constant, CONSTANTS
+from .meta import (
+    DType,
+    func_template,
+    assert_name,
+    is_constant,
+    CONSTANTS,
+    get_parameters,
+)
 
 
 class GenScalar:
@@ -57,16 +64,18 @@ class GenScalar:
                 f"Invalid constant expression: {expr}. Must be a symbol, literal or Rational."
             )
 
-    def generate_func(self, func_name: str, expr):
+    def generate_func(self, func_name: str, expr: sp.Expr):
         assert_name(func_name)
 
-        params = sorted(list(map(lambda x: str(x), expr.free_symbols)))
+        params = get_parameters(expr)
         params_decl = [f"{p}: {str(self.dtype)}" for p in params]
         params_list = ", ".join(params_decl)
 
         return self._generate_func_code(expr, func_name, params_list)
 
-    def generate_func_given_params(self, func_name: str, expr, params):
+    def generate_func_given_params(
+        self, func_name: str, expr: sp.Expr, params: list[str]
+    ):
         """
         You MUST make sure your parameter list is correct!!!
         """
@@ -152,7 +161,7 @@ class GenScalar:
             return f"({self.sympy_to_rust(expr.args[0])}).ceil()"
         elif isinstance(expr, sp.sign):
             expr_str = f"{self.sympy_to_rust(expr.args[0])}"
-            return f"if {self.is_zero_boolean(expr_str)} {{ {expr_str} }} else {{ ({expr_str}).signum() }}"
+            return f"(if {self.is_zero_boolean(expr_str)} {{ {expr_str} }} else {{ ({expr_str}).signum() }})"
         elif isinstance(expr, sp.Abs):
             return f"({self.sympy_to_rust(expr.args[0])}).abs()"
 

@@ -1,5 +1,11 @@
 import sympy as sp
-from ..meta import DType, funcname, watermarked, assert_name, get_parameters
+from ..meta import (
+    DType,
+    funcname,
+    watermarked,
+    assert_name,
+    get_parameters,
+)
 from ..dense import GenDense
 import itertools
 
@@ -43,8 +49,8 @@ class GenNalgebra:
         self.dtype = dtype
         self.dense = GenDense(dtype, tol, precision_digit, debug)
 
-    def generate(self, mat: sp.Matrix, func_name: str):
-        entries_impl = self.dense.generate(mat, func_name)
+    def generate(self, func_name: str, mat: sp.Matrix):
+        entries_impl = self.dense.generate(func_name, mat)
         params = get_parameters(mat)
         entries_impl["matrix"] = nalgebra_template(
             func_name, params, self.dtype, mat.shape

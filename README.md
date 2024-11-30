@@ -48,3 +48,5 @@ abs
 1. Some functions are ambiguous (for example, `sign`). Please refer to documentation for their semantics.
 2. Please handle NaN and inf carefully by yourself.
 3. We don't do indent/format. `cargo fmt` do it for us.
+4. Generated function has parameters in lexicographical order of identifiers (default in `sortedcontainers`).
+5. If you are using rust-analyzer VSCode extension, try to put your numerical computation code in a crate different from your driver code, especially when the code exceeds say, 10000 lines. Otherwise, your rust-analyzer may hang often.

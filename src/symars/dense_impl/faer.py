@@ -50,8 +50,8 @@ class GenFaer:
         self.dtype = dtype
         self.dense = GenDense(dtype, tol, precision_digit, debug)
 
-    def generate(self, mat: sp.Matrix, func_name: str):
-        entries_impl = self.dense.generate(mat, func_name)
+    def generate(self, func_name: str, mat: sp.Matrix):
+        entries_impl = self.dense.generate(func_name, mat)
         params = get_parameters(mat)
         entries_impl["matrix"] = faer_matrix_template(
             func_name, params, self.dtype, mat.shape
@@ -105,9 +105,9 @@ class GenFaerVec:
         self.dtype = dtype
         self.dense = GenDense(dtype, tol, precision_digit, debug)
 
-    def generate(self, mat: sp.Matrix, func_name: str):
+    def generate(self, func_name: str, mat: sp.Matrix):
         vecshape = get_vecshape(mat)
-        entries_impl = self.dense.generate(mat, func_name)
+        entries_impl = self.dense.generate(func_name, mat)
         params = get_parameters(mat)
         entries_impl["matrix"] = faer_vector_template(
             func_name,

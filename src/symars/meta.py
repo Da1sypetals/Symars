@@ -8,6 +8,7 @@ from sympy.core.numbers import (
     Catalan,
     TribonacciConstant,
 )
+from sortedcollections import SortedList
 
 ###############################################################
 ############################ types ############################
@@ -42,14 +43,9 @@ def get_parameters(expr):
         parameters = set()
         for e in expr:
             parameters = parameters.union(set(get_parameters(e)))
-        return list(sorted(parameters))
+        return SortedList(parameters)
     else:
-        return sorted(list(map(lambda x: str(x), expr.free_symbols)))
-
-    # elif isinstance(expr, (sp.Expr, sp.Matrix)):
-    #     return sorted(list(map(lambda x: str(x), expr.free_symbols)))
-    # else:
-    #     raise TypeError("Invalid type: expected (list of) SymPy expression or matrix.")
+        return SortedList(map(lambda x: str(x), expr.free_symbols))
 
 
 def funcname(name, mi, ni):

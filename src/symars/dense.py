@@ -15,7 +15,7 @@ class GenDense:
         self.dtype = dtype
         self.gen_scalar = GenScalar(dtype, tol, precision_digit, debug)
 
-    def generate(self, mat: sp.Matrix, func_name: str):
+    def generate(self, func_name: str, mat: sp.Matrix):
         assert_name(func_name)
 
         m, n = mat.shape

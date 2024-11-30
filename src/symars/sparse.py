@@ -15,9 +15,6 @@ class GenSparse:
         self.dtype = dtype
         self.gen_scalar = GenScalar(dtype, tol, precision_digit, debug)
 
-    def params(self, mat: sp.Matrix):
-        return sorted(list(map(lambda x: str(x), mat.free_symbols)))
-
     def _generate_comments(self, num_expr: int, func_name: str):
         def comment_item(i):
             return f"value at index position {i} = {funcname_vector(func_name, i)}"
@@ -31,7 +28,7 @@ class GenSparse:
         num_expr = len(exprs)
         params = get_parameters(exprs)
 
-        impls = SortedDict(
+        entries = SortedDict(
             {
                 str(i): self.gen_scalar.generate_func_given_params(
                     funcname_vector(func_name, i), exprs[i], params
@@ -40,7 +37,7 @@ class GenSparse:
             }
         )
 
-        return impls
+        return entries
 
     def _generate_triplets_code(self, exprs: list[sp.Expr], func_name: str):
         num_expr = len(exprs)
@@ -66,7 +63,7 @@ pub fn {func_name}(triplets: {triplet_type}, indices: &[(usize, usize)], {param_
 """
         return triplet_code
 
-    def generate(self, exprs: list[sp.Expr], func_name: str):
+    def generate(self, func_name: str, exprs: list[sp.Expr]):
         entries = self._generate_entries_code(exprs, func_name)
         triplets = self._generate_triplets_code(exprs, func_name)
         entries["triplets"] = triplets

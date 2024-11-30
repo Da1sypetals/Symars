@@ -9,6 +9,7 @@
 # package metadata
 *.egg-info
 all_py.txt
+abd.ipynb
 
 rust_generated/Cargo.lock
 rust_generated/target/
