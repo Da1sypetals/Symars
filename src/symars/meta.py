@@ -8,7 +8,7 @@ from sympy.core.numbers import (
     Catalan,
     TribonacciConstant,
 )
-from sortedcollections import SortedList
+from sortedcontainers import SortedList
 
 ###############################################################
 ############################ types ############################
