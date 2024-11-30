@@ -1,5 +1,5 @@
 # Symars
-Generate Rust code from symbolic vector and matrix expressions.
+Generate Rust code from SymPy expressions, including matrices.
 
 # Requirements
 ```

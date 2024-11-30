@@ -24,6 +24,9 @@ class GenScalar:
     def float_eq(self, a, b):
         return sp.Abs(a - b) < self.tol
 
+    def is_zero_boolean(self, expr_str: str):
+        return f"({expr_str}).abs() == 0.0{self.dtype.suffix()}"
+
     def debug(self, *args, **kw):
         if self.debug_on:
             print("[symars debug] ", end="")
@@ -139,8 +142,8 @@ class GenScalar:
         # other functions
         elif isinstance(expr, sp.sinc):
             arg = self.sympy_to_rust(expr.args[0])
-            sinc_nonzero = f"((({arg}).sin()) / {arg})"
-            return f"(if {arg} != 0{self.dtype.suffix()} {{{sinc_nonzero}}} else {{{1}{self.dtype.suffix()}}})"
+            sinc_nonzero = f"((({arg}).sin()) / ({arg}))"
+            return f"(if {self.is_zero_boolean(arg)} {{ {1.0}{self.dtype.suffix()} }} else {{ {sinc_nonzero} }})"
 
         # discrete and nondifferentiable
         elif isinstance(expr, sp.floor):
@@ -149,7 +152,7 @@ class GenScalar:
             return f"({self.sympy_to_rust(expr.args[0])}).ceil()"
         elif isinstance(expr, sp.sign):
             expr_str = f"{self.sympy_to_rust(expr.args[0])}"
-            return f"if ({expr_str}).abs() == 0.0{self.dtype.suffix()} {{ {expr_str} }} else {{ ({expr_str}).signum() }}"
+            return f"if {self.is_zero_boolean(expr_str)} {{ {expr_str} }} else {{ ({expr_str}).signum() }}"
         elif isinstance(expr, sp.Abs):
             return f"({self.sympy_to_rust(expr.args[0])}).abs()"
 
@@ -166,14 +169,14 @@ class GenScalar:
         # operators
         elif isinstance(expr, sp.Add):
             operands = [f"({self.sympy_to_rust(arg)})" for arg in expr.args]
-            return " + ".join(operands)
+            return f'({" + ".join(operands)})'
         elif isinstance(expr, sp.Mul):
             if expr.args[0] == -1:
                 val = self.sympy_to_rust(sp.Mul(*(expr.args[1:])))
-                return f"-({val})"
+                return f"(-({val}))"
 
             operands = [f"({self.sympy_to_rust(arg)})" for arg in expr.args]
-            return " * ".join(operands)
+            return f'({" * ".join(operands)})'
         elif isinstance(expr, sp.Pow):
             # Check if the exponent is an integer
             base = self.sympy_to_rust(expr.args[0])
