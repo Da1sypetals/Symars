@@ -15,7 +15,7 @@ def faer_matrix_template(name, params, dtype, return_shape):
     assert_name(name)
     assert (
         len(return_shape) == 2
-    ), "Return shape shoule have 2 dimensions, found {return_shape}"
+    ), f"Return shape shoule have 2 dimensions, found {return_shape}"
 
     m, n = return_shape
     range_prod = itertools.product(range(m), range(n))

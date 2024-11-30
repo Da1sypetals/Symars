@@ -9,7 +9,7 @@ description = "Generate Rust code with Sympy, for both scalars and matrices."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Da1sypetals", email = "da1sypetals.iota@gmail.com" }]
-dependencies = ["sympy"]
+dependencies = ["sympy", "sortedcontainers"]
 
 [project.urls]
 Homepage = "https://github.com/Da1sypetals/Symars"
