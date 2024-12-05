@@ -46,7 +46,7 @@ def __init__(
 
 == *Public Methods:*
 ```py
-generate_func(func_name: str, expr: sympy.Expr) -> str
+generate(func_name: str, expr: sympy.Expr) -> str
 ```
 - `func_name` (`str`): The name of the generated Rust function.
 - `expr` (`sympy.Expr`): A scalar SymPy expression.

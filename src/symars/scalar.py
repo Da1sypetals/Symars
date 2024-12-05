@@ -64,7 +64,7 @@ class GenScalar:
                 f"Invalid constant expression: {expr}. Must be a symbol, literal or Rational."
             )
 
-    def generate_func(self, func_name: str, expr: sp.Expr):
+    def generate(self, func_name: str, expr: sp.Expr):
         assert_name(func_name)
 
         params = get_parameters(expr)
