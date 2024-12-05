@@ -1,3 +1,4 @@
+pub mod gen_cached;
 pub mod gen_mat_array;
 pub mod gen_mat_faer;
 pub mod gen_mat_nalgebra;
