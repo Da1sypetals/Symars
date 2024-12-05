@@ -6,3 +6,12 @@ edition = "2021"
 [dependencies]
 nalgebra = "0.33.2"
 faer = "0.19.4"
+criterion = { version = "0.5", features = ["html_reports"] }
+serde = { version = "1.0.215", features = ["derive", "rc"] }
+toml = "0.8.19"
+
+
+[[bench]]
+name = "compare_cached"
+path = "benches/compare_cached.rs"
+harness = false

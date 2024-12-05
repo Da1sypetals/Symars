@@ -13,6 +13,131 @@
 */
 
 #[inline]
+pub fn dphi_dx_cached(
+    Dminv_0: f64,
+    Dminv_1: f64,
+    Dminv_2: f64,
+    Dminv_3: f64,
+    a: f64,
+    x_0: f64,
+    x_1: f64,
+    x_2: f64,
+    y_0: f64,
+    y_1: f64,
+    y_2: f64,
+    z_0: f64,
+    z_1: f64,
+    z_2: f64,
+) -> f64 {
+    let __intermediate_result_5 = ((-1.00000000000000_f64)
+        + ((((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2))
+            + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2))))).powi(2))
+            + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2))))).powi(2)))
+        .sqrt()));
+    let __intermediate_result_6 =
+        (((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2))
+            + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2))))).powi(2))
+            + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2))))).powi(2)))
+        .sqrt();
+    let __intermediate_result_12 = (-(x_1));
+    let __intermediate_result_28 = (-(z_1));
+    let __intermediate_result_40 =
+        (((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2)))));
+    let __intermediate_result_47 = (((Dminv_1)
+        * ((-(y_1)) + ((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))))
+        + ((Dminv_3) * ((y_0) + (-(y_2)))))
+        .powi(2);
+    let __intermediate_result_79 =
+        (((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
+            + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2))
+            + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2)))
+        .sqrt();
+
+    (((a)
+        * ((((__intermediate_result_5).powi(4))
+            * ((((((Dminv_0) * ((x_0) + (__intermediate_result_12)))
+                + ((Dminv_2) * ((x_0) + (-(x_2)))))
+                .powi(2))
+                + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_0) * ((z_0) + (__intermediate_result_28)))
+                    + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .powf(-0.50000000000000000000_f64))
+            * (((2.0000000000000000000_f64) * (Dminv_0))
+                + ((2.0000000000000000000_f64) * (Dminv_2)))
+            * (((Dminv_0) * ((x_0) + (__intermediate_result_12)))
+                + ((Dminv_2) * ((x_0) + (-(x_2))))))
+            + (((((__intermediate_result_40).powi(2))
+                + ((((Dminv_1) * ((z_0) + (__intermediate_result_28)))
+                    + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                    .powi(2))
+                + (__intermediate_result_47))
+                .powf(-0.50000000000000000000_f64))
+                * ((-1.00000000000000_f64)
+                    + ((((((Dminv_1)
+                        * ((-1.00000000000000_f64)
+                            + (__intermediate_result_6)
+                            + (__intermediate_result_12)))
+                        + (((x_0) + (-(x_2))) * (__intermediate_result_40)))
+                        .powi(2))
+                        + ((((Dminv_1)
+                            * ((-1.00000000000000_f64)
+                                + (__intermediate_result_6)
+                                + (__intermediate_result_28)))
+                            + ((Dminv_3)
+                                * ((-1.00000000000000_f64)
+                                    + (__intermediate_result_6)
+                                    + (-(z_2)))))
+                            .powi(2))
+                        + (__intermediate_result_47))
+                        .sqrt()))
+                * (((2.0000000000000000000_f64) * (Dminv_1))
+                    + ((2.0000000000000000000_f64) * (Dminv_3)))
+                * (__intermediate_result_40))))
+        + ((((-1.00000000000000_f64)
+            + ((((((Dminv_1) * ((y_0) + (-(y_1))))
+                + ((Dminv_3) * ((__intermediate_result_79) + (-(y_2)))))
+                .powi(2))
+                + ((((Dminv_1) * ((__intermediate_result_79) + (__intermediate_result_12)))
+                    + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                    .powi(2))
+                + ((((Dminv_1) * ((__intermediate_result_79) + (__intermediate_result_28)))
+                    + ((Dminv_3) * ((z_0) + (-(__intermediate_result_79)))))
+                    .powi(2)))
+            .sqrt()))
+        .powi(2))
+            * ((((__intermediate_result_40).powi(2))
+                + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_1) * ((z_0) + (__intermediate_result_28)))
+                    + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .recip()))
+        + ((__intermediate_result_5).cos())
+        + ((__intermediate_result_40).cos())
+        + ((__intermediate_result_79).cosh())
+        + ((__intermediate_result_5).sin())
+        + ((__intermediate_result_79).sinh())
+        + ((__intermediate_result_5).sinh())
+        + ((__intermediate_result_40).sinh()))
+}
+
+/*
+
+* Code generated by Symars. Thank you for using Symars!
+  Symars is licensed under MIT licnese.
+  Repository: https://github.com/Da1sypetals/Symars
+
+* Computation code is not intended for manual editing.
+
+* If you find an error,
+  or if you believe Symars generates incorrect result,
+  please raise an issue under our repo with minimal reproducible example.
+
+*/
+
+#[inline]
 pub fn dphi_dx(
     Dminv_0: f64,
     Dminv_1: f64,
@@ -29,83 +154,188 @@ pub fn dphi_dx(
     z_1: f64,
     z_2: f64,
 ) -> f64 {
-    let __intermediate_result_0 = (-(x_1));
-    let __intermediate_result_1 = ((x_0) + (-(x_1)));
-    let __intermediate_result_2 = ((Dminv_0) * ((x_0) + (-(x_1))));
-    let __intermediate_result_3 = (-(x_2));
-    let __intermediate_result_4 = ((x_0) + (-(x_2)));
-    let __intermediate_result_5 = ((Dminv_2) * ((x_0) + (-(x_2))));
-    let __intermediate_result_6 =
-        (((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2)))));
-    let __intermediate_result_7 =
-        (((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2);
-    let __intermediate_result_8 = (-(y_1));
-    let __intermediate_result_9 = ((y_0) + (-(y_1)));
-    let __intermediate_result_10 = ((Dminv_0) * ((y_0) + (-(y_1))));
-    let __intermediate_result_11 = (-(y_2));
-    let __intermediate_result_12 = ((y_0) + (-(y_2)));
-    let __intermediate_result_13 = ((Dminv_2) * ((y_0) + (-(y_2))));
-    let __intermediate_result_14 =
-        (((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))));
-    let __intermediate_result_15 =
-        (((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2))))).powi(2);
-    let __intermediate_result_16 = (-(z_1));
-    let __intermediate_result_17 = ((z_0) + (-(z_1)));
-    let __intermediate_result_18 = ((Dminv_0) * ((z_0) + (-(z_1))));
-    let __intermediate_result_19 = (-(z_2));
-    let __intermediate_result_20 = ((z_0) + (-(z_2)));
-    let __intermediate_result_21 = ((Dminv_2) * ((z_0) + (-(z_2))));
-    let __intermediate_result_22 =
-        (((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2)))));
-    let __intermediate_result_23 =
-        (((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2))))).powi(2);
-    let __intermediate_result_24 =
-        (((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2))
-            + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2))))).powi(2))
-            + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2))))).powi(2)));
-    let __intermediate_result_32 = ((Dminv_1) * ((x_0) + (-(x_1))));
-    let __intermediate_result_33 = ((Dminv_3) * ((x_0) + (-(x_2))));
-    let __intermediate_result_34 =
-        (((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2)))));
-    let __intermediate_result_35 =
-        (((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2);
-    let __intermediate_result_36 = ((Dminv_1) * ((y_0) + (-(y_1))));
-    let __intermediate_result_37 = ((Dminv_3) * ((y_0) + (-(y_2))));
-    let __intermediate_result_38 =
-        (((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2)))));
-    let __intermediate_result_39 =
-        (((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2);
-    let __intermediate_result_40 = ((Dminv_1) * ((z_0) + (-(z_1))));
-    let __intermediate_result_41 = ((Dminv_3) * ((z_0) + (-(z_2))));
-    let __intermediate_result_42 =
-        (((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2)))));
-    let __intermediate_result_43 =
-        (((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2);
-    let __intermediate_result_44 =
-        (((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
-            + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2))
-            + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2)));
-    let __intermediate_result_46 =
-        (((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
-            + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2))
-            + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2)))
-        .sqrt();
-    let __intermediate_result_47 = ((-1.00000000000000_f64)
-        + ((((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
-            + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2))
-            + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2)))
-        .sqrt()));
-
     (((a)
-        * ((((__intermediate_result_24).powf(-0.50000000000000000000_f64))
-            * ((-1.00000000000000_f64) + ((__intermediate_result_24).sqrt()))
+        * (((((-1.00000000000000_f64)
+            + ((((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2)))))
+                .powi(2))
+                + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .sqrt()))
+        .powi(4))
+            * ((((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2)))))
+                .powi(2))
+                + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .powf(-0.50000000000000000000_f64))
             * (((2.0000000000000000000_f64) * (Dminv_0))
                 + ((2.0000000000000000000_f64) * (Dminv_2)))
-            * (__intermediate_result_6))
-            + (((__intermediate_result_44).powf(-0.50000000000000000000_f64))
-                * (__intermediate_result_47)
+            * (((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))))
+            + (((((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                .powi(2))
+                + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                    .powi(2))
+                + ((((Dminv_1)
+                    * ((-(y_1))
+                        + ((Dminv_1) * ((x_0) + (-(x_1))))
+                        + ((Dminv_3) * ((x_0) + (-(x_2))))))
+                    + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                    .powi(2)))
+            .powf(-0.50000000000000000000_f64))
+                * ((-1.00000000000000_f64)
+                    + ((((((Dminv_1)
+                        * ((-1.00000000000000_f64)
+                            + ((((((Dminv_0) * ((x_0) + (-(x_1))))
+                                + ((Dminv_2) * ((x_0) + (-(x_2)))))
+                                .powi(2))
+                                + ((((Dminv_0) * ((y_0) + (-(y_1))))
+                                    + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                                    .powi(2))
+                                + ((((Dminv_0) * ((z_0) + (-(z_1))))
+                                    + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                                    .powi(2)))
+                            .sqrt())
+                            + (-(x_1))))
+                        + (((x_0) + (-(x_2)))
+                            * (((Dminv_1) * ((x_0) + (-(x_1))))
+                                + ((Dminv_3) * ((x_0) + (-(x_2)))))))
+                        .powi(2))
+                        + ((((Dminv_1)
+                            * ((-1.00000000000000_f64)
+                                + ((((((Dminv_0) * ((x_0) + (-(x_1))))
+                                    + ((Dminv_2) * ((x_0) + (-(x_2)))))
+                                    .powi(2))
+                                    + ((((Dminv_0) * ((y_0) + (-(y_1))))
+                                        + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                                        .powi(2))
+                                    + ((((Dminv_0) * ((z_0) + (-(z_1))))
+                                        + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                                        .powi(2)))
+                                .sqrt())
+                                + (-(z_1))))
+                            + ((Dminv_3)
+                                * ((-1.00000000000000_f64)
+                                    + ((((((Dminv_0) * ((x_0) + (-(x_1))))
+                                        + ((Dminv_2) * ((x_0) + (-(x_2)))))
+                                        .powi(2))
+                                        + ((((Dminv_0) * ((y_0) + (-(y_1))))
+                                            + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                                            .powi(2))
+                                        + ((((Dminv_0) * ((z_0) + (-(z_1))))
+                                            + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                                            .powi(2)))
+                                    .sqrt())
+                                    + (-(z_2)))))
+                            .powi(2))
+                        + ((((Dminv_1)
+                            * ((-(y_1))
+                                + ((Dminv_1) * ((x_0) + (-(x_1))))
+                                + ((Dminv_3) * ((x_0) + (-(x_2))))))
+                            + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                            .powi(2)))
+                    .sqrt()))
                 * (((2.0000000000000000000_f64) * (Dminv_1))
                     + ((2.0000000000000000000_f64) * (Dminv_3)))
-                * (__intermediate_result_34))))
-        + (((__intermediate_result_47).powi(2)) * ((__intermediate_result_44).recip())))
+                * (((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))))))
+        + ((((-1.00000000000000_f64)
+            + ((((((Dminv_1) * ((y_0) + (-(y_1))))
+                + ((Dminv_3)
+                    * (((((((Dminv_1) * ((x_0) + (-(x_1))))
+                        + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                        .powi(2))
+                        + ((((Dminv_1) * ((y_0) + (-(y_1))))
+                            + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                            .powi(2))
+                        + ((((Dminv_1) * ((z_0) + (-(z_1))))
+                            + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                            .powi(2)))
+                    .sqrt())
+                        + (-(y_2)))))
+                .powi(2))
+                + ((((Dminv_1)
+                    * (((((((Dminv_1) * ((x_0) + (-(x_1))))
+                        + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                        .powi(2))
+                        + ((((Dminv_1) * ((y_0) + (-(y_1))))
+                            + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                            .powi(2))
+                        + ((((Dminv_1) * ((z_0) + (-(z_1))))
+                            + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                            .powi(2)))
+                    .sqrt())
+                        + (-(x_1))))
+                    + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                    .powi(2))
+                + ((((Dminv_1)
+                    * (((((((Dminv_1) * ((x_0) + (-(x_1))))
+                        + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                        .powi(2))
+                        + ((((Dminv_1) * ((y_0) + (-(y_1))))
+                            + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                            .powi(2))
+                        + ((((Dminv_1) * ((z_0) + (-(z_1))))
+                            + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                            .powi(2)))
+                    .sqrt())
+                        + (-(z_1))))
+                    + ((Dminv_3)
+                        * ((z_0)
+                            + (-((((((Dminv_1) * ((x_0) + (-(x_1))))
+                                + ((Dminv_3) * ((x_0) + (-(x_2)))))
+                                .powi(2))
+                                + ((((Dminv_1) * ((y_0) + (-(y_1))))
+                                    + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                                    .powi(2))
+                                + ((((Dminv_1) * ((z_0) + (-(z_1))))
+                                    + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                                    .powi(2)))
+                            .sqrt())))))
+                .powi(2)))
+            .sqrt()))
+        .powi(2))
+            * ((((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
+                + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .recip()))
+        + (((-1.00000000000000_f64)
+            + ((((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2))
+                + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .sqrt()))
+        .cos())
+        + ((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).cos())
+        + (((((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
+            + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2))
+            + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2)))
+        .sqrt())
+        .cosh())
+        + (((-1.00000000000000_f64)
+            + ((((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2))
+                + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .sqrt()))
+        .sin())
+        + (((((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).powi(2))
+            + ((((Dminv_1) * ((y_0) + (-(y_1)))) + ((Dminv_3) * ((y_0) + (-(y_2))))).powi(2))
+            + ((((Dminv_1) * ((z_0) + (-(z_1)))) + ((Dminv_3) * ((z_0) + (-(z_2))))).powi(2)))
+        .sqrt())
+        .sinh())
+        + (((-1.00000000000000_f64)
+            + ((((((Dminv_0) * ((x_0) + (-(x_1)))) + ((Dminv_2) * ((x_0) + (-(x_2))))).powi(2))
+                + ((((Dminv_0) * ((y_0) + (-(y_1)))) + ((Dminv_2) * ((y_0) + (-(y_2)))))
+                    .powi(2))
+                + ((((Dminv_0) * ((z_0) + (-(z_1)))) + ((Dminv_2) * ((z_0) + (-(z_2)))))
+                    .powi(2)))
+            .sqrt()))
+        .sinh())
+        + ((((Dminv_1) * ((x_0) + (-(x_1)))) + ((Dminv_3) * ((x_0) + (-(x_2))))).sinh()))
 }
