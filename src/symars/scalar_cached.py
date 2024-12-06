@@ -38,19 +38,21 @@ class Subtree:
     def __init__(self, name):
         self.name = name
         # detected count in an expression tree
-        self.count = 0
-        # use count as a tree root node
+        self.tree_count = 0
+        # use count as a subtree root node
         self.use_count = 0
         # is used as a tree root node
         self.used = False
 
     def incr(self):
-        self.count += 1
+        self.tree_count += 1
 
     def count_used(self):
+        """Count the subtree as `used`"""
         self.use_count += 1
 
-    def use(self):
+    def mark_in_expr(self):
+        """Mark the subtree as `inside the expression`"""
         self.used = True
 
 
@@ -166,134 +168,140 @@ class GenScalarCached:
         )
         return funcimpl
 
-    def _cache_subtree_recursive(self, expr: sp.Expr, cache):
-        """Translate a SymPy expression to Rust code."""
+    def _traverse_subtree_recursive(self, expr: sp.Expr, op):
+        """
+        Traverse expression recursive and apply some operation.
+        The operation should return a `bool`, which implies `should stop recursion`:
+            - If True is returned, stop recursion (immediate return);
+            - Else, continue recursion.
+
+        """
 
         # trigonomics
         if isinstance(expr, sp.sin):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.cos):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.tan):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.cot):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.asin):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.acos):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.atan2):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
-            self._cache_subtree_recursive(expr.args[1], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
+            self._traverse_subtree_recursive(expr.args[1], op)
 
         # hyperbolic trigonomics
         elif isinstance(expr, sp.sinh):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.cosh):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.tanh):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.asinh):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.acosh):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.atanh):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
 
         # euler constant related
         elif isinstance(expr, sp.exp):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.log):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
 
         # other functions
         elif isinstance(expr, sp.sinc):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
 
         # discrete and nondifferentiable
         elif isinstance(expr, sp.floor):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.ceiling):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.sign):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
         elif isinstance(expr, sp.Abs):
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
 
         # min / max
         elif isinstance(expr, sp.Min):
             if len(expr.args) != 2:
                 raise ValueError("Min and Max should have 2 arguments!")
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
-            self._cache_subtree_recursive(expr.args[1], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
+            self._traverse_subtree_recursive(expr.args[1], op)
         elif isinstance(expr, sp.Max):
             if len(expr.args) != 2:
                 raise ValueError("Min and Max should have 2 arguments!")
-            if cache(expr):
+            if op(expr):
                 return
-            self._cache_subtree_recursive(expr.args[0], cache)
-            self._cache_subtree_recursive(expr.args[1], cache)
+            self._traverse_subtree_recursive(expr.args[0], op)
+            self._traverse_subtree_recursive(expr.args[1], op)
 
         # operators
         elif isinstance(expr, sp.Add):
-            if cache(expr):
+            if op(expr):
                 return
             for operand in expr.args:
-                self._cache_subtree_recursive(operand, cache)
+                self._traverse_subtree_recursive(operand, op)
 
         elif isinstance(expr, sp.Mul):
-            if cache(expr):
+            if op(expr):
                 return
             for operand in expr.args:
-                self._cache_subtree_recursive(operand, cache)
+                self._traverse_subtree_recursive(operand, op)
 
         elif isinstance(expr, sp.Pow):
-            if cache(expr):
+            if op(expr):
                 return
             for operand in expr.args:
-                self._cache_subtree_recursive(operand, cache)
+                self._traverse_subtree_recursive(operand, op)
 
         elif is_constant(expr):
             pass
@@ -323,12 +331,14 @@ class GenScalarCached:
             cached[expr].incr()
             return False
 
-        self._cache_subtree_recursive(expr, cache)
+        self._traverse_subtree_recursive(expr, cache)
 
-        cached = {k: v for k, v in cached.items() if v.count >= min_occurrence}
+        cached = {k: v for k, v in cached.items() if v.tree_count >= min_occurrence}
         return cached
 
     def check_usage(self, expr, min_occurrence, cached):
+        """Check usage of all intermediate cached results"""
+
         def use_expr(expr: sp.Expr):
             """Return whether recursion should terminate"""
             if expr in cached:
@@ -337,7 +347,7 @@ class GenScalarCached:
                 return True
             return False
 
-        self._cache_subtree_recursive(expr, use_expr)
+        self._traverse_subtree_recursive(expr, use_expr)
 
         cached = {k: v for k, v in cached.items() if v.use_count >= min_occurrence}
         return cached
@@ -346,7 +356,7 @@ class GenScalarCached:
         """Translate a SymPy expression to Rust code."""
 
         if expr in cached:
-            cached[expr].use()
+            cached[expr].mark_in_expr()
             self.debug(f"!!use: {cached[expr].name}")
             return f"({cached[expr].name})"
 

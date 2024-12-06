@@ -1,15 +1,9 @@
 # Symars
 Generate Rust code from SymPy expressions, including matrices.
 
-# Requirements
-```
-sympy
-sortedcontainers
-```
-
 # Use
-- `pip install .`
-- See `examples.ipynb`.
+- Clone this repo and `pip install .`
+- See `examples.ipynb` for example use.
 - Refer to `docs/user_docs.pdf` for details.
 - See `rust_generated/src/sym/*.rs` for sample generated code.
 
@@ -43,6 +37,14 @@ signum // sp.sign
 abs
 
 ```
+
+
+# Dependencies
+```
+sympy
+sortedcontainers
+```
+
 
 # Note
 1. Some functions are ambiguous (for example, `sign`). Please refer to documentation for their semantics.
